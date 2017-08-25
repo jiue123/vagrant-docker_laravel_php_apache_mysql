@@ -1,0 +1,34 @@
+version: '2'
+services:
+  mysql:
+    image: mysql
+    container_name: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+    volumes:
+      - ${MYSQL_BACKUP_DATA}:${MYSQL_DATA}
+  centos_env:
+    build:
+      context: ./centosEnv
+    container_name: project
+    depends_on:
+      - mysql
+    ports:
+      - 8008:80
+    volumes:
+      - ${SOURCE_CODE}:${CONTAINER_SOURCE_CODE}
+    links:
+      - mysql:database
+    env_file:
+      - ${CENTOS_IMAGE_ENV_FILE}
+  adminer:
+    image: adminer
+    container_name: adminer
+    depends_on:
+      - mysql
+      - centos_env
+    ports:
+      - 8007:8080
+    links:
+      - mysql:db

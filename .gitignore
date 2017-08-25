@@ -1,0 +1,20 @@
+# Eclipse Project File
+.buildpath
+.project
+.settings/
+.externalToolBuilders/
+
+# NetBeans Project File
+/nbproject
+
+# PhpStorm Project File
+.idea
+
+# Vagrant
+.vagrant
+
+# Mysql Backup Data
+mysql/*
+
+# Mysql Backup Data
+web/*
