@@ -7,6 +7,7 @@
  
 **Step 2:** Run Project
   -
+  - ``cd /vagrant/`` move to directory ``vagrant``
   - Type ``docker-compose up --build`` builds, (re)creates, starts, and attaches to containers for a service.
   
 **Step 3:** Test Services
