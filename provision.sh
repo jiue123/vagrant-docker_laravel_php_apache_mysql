@@ -4,9 +4,6 @@ yum install -y deltarpm epel-release git wget net-tools
 rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm
 
-echo "Install APACHE ============================================================================="
-yum install -y httpd
-
 echo "Install PHP ================================================================================"
 yum install -y php70w php70w-opcache php70w-mysql.x86_64 php70w-mbstring.x86_64 php70w-xml.x86_64 php70w-pdo.x86_64
 
