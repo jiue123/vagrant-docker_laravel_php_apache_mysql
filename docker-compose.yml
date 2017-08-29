@@ -14,6 +14,7 @@ services:
     container_name: project
     depends_on:
       - mysql
+      - adminer
     ports:
       - 8008:80
     volumes:
@@ -27,7 +28,6 @@ services:
     container_name: adminer
     depends_on:
       - mysql
-      - centos_env
     ports:
       - 8007:8080
     links:
