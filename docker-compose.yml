@@ -2,6 +2,11 @@ version: '2'
 services:
   mysql:
     image: mysql
+    networks:
+      database:
+        ipv4_address: 172.19.0.11
+        aliases:
+          - ${MYSQL_ALIAS}
     container_name: mysql
     environment:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
@@ -12,6 +17,11 @@ services:
     build:
       context: ./centosEnv
     container_name: project
+    environment:
+      - DB_HOST=${MYSQL_ALIAS}
+      - DB_DATABASE=${MYSQL_DATABASE}
+      - DB_USERNAME=${MYSQL_USERNAME}
+      - DB_PASSWORD=${MYSQL_ROOT_PASSWORD}
     depends_on:
       - mysql
       - adminer
@@ -19,8 +29,8 @@ services:
       - 8008:80
     volumes:
       - ${SOURCE_CODE}:${CONTAINER_SOURCE_CODE}
-    links:
-      - mysql:database
+    networks:
+      - database
     env_file:
       - ${CENTOS_IMAGE_ENV_FILE}
   adminer:
@@ -30,5 +40,12 @@ services:
       - mysql
     ports:
       - 8007:8080
-    links:
-      - mysql:db
+    networks:
+      - database
+networks:
+  database:
+    ipam:
+      config:
+      -
+        subnet: 172.19.0.0/24
+        gateway: 172.19.0.1

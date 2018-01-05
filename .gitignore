@@ -17,4 +17,6 @@
 mysql/*
 
 # Project
-web/*
+laravel/*
+
+.DS_Store
